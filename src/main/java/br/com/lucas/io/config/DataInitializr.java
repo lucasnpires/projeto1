@@ -22,11 +22,21 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
 		List<User> users = userRepository.findAll();
 
 		if (users.isEmpty()) {
-			User userAdmin = new User();
-			userAdmin.setNome("admin");
-			userAdmin.setEmail("admin@admin.com.br");
-			userRepository.save(userAdmin);
+			createUser("Admin", "admin@admin.com.br");
+			createUser("Lucas", "npires.lucas@gmail.com");
+			createUser("Joao", "joao@gmail.com.br");
 		}
+		
+		User userLucas = userRepository.getOne(2L);
+		System.out.println("USUÁRIO A SER DELETADO: "+userLucas.getName());
+		
+		userRepository.delete(userLucas);
+		
+	}
+	
+	public void createUser(String name, String email) {
+		User user = new User(name, email);
+		userRepository.save(user);
 	}
 
 }

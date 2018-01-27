@@ -21,6 +21,18 @@ public class User {
 	
 	@ManyToMany
 	private Set<Role> roles;
+	
+	
+
+	public User() {
+		
+	}
+
+	public User(String name, String email) {
+		super();
+		this.name = name;
+		this.email = email;
+	}
 
 	public Long getId() {
 		return id;
@@ -30,12 +42,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getNome() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNome(String nome) {
-		this.name = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
