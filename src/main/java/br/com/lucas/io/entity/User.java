@@ -19,19 +19,20 @@ public class User {
 	
 	private String email;
 	
+	private String status;
+	
 	@ManyToMany
 	private Set<Role> roles;
-	
-	
 
 	public User() {
 		
 	}
 
-	public User(String name, String email) {
+	public User(String name, String email, String status) {
 		super();
 		this.name = name;
 		this.email = email;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -56,6 +57,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }
