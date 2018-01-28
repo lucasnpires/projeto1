@@ -2,18 +2,15 @@ package br.com.lucas.io.entity;
 
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private Long id;
+	private String id;
 	
 	private String name;
 	
@@ -21,7 +18,6 @@ public class User {
 	
 	private String status;
 	
-	@ManyToMany
 	private Set<Role> roles;
 
 	public User() {
@@ -34,12 +30,12 @@ public class User {
 		this.email = email;
 		this.status = status;
 	}
-
-	public Long getId() {
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -67,4 +63,11 @@ public class User {
 		this.status = status;
 	}
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 }

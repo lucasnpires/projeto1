@@ -37,31 +37,33 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
 		
 		findByName();
 		System.out.println("#######################");
-		findAllByStatus();
-		getOneByIdAndDelete(2L);
-	}
-	
-	private void getOneByIdAndDelete(Long id) {
-		User userLucas = userRepository.getOne(id);
-		System.out.println("USUÁRIO A SER EXCLUÍDO: "+userLucas.getName());
-		userRepository.delete(userLucas);
-	}
-	
-
-	private void findAllByStatus() {
-		List<User> usersAtivos = userRepository.findAllByStatus("Ativo");
-		System.out.println("#######################");
-		System.out.println("USUÁRIOS ATIVOS");
-		usersAtivos.forEach(user ->{
-			System.out.println("#######################");
-			System.out.println("CÓDIGO: "+user.getId());
-			System.out.println("NOME: "+user.getName());
-			System.out.println("EMAIL: "+user.getEmail());
-			System.out.println("#######################");
-		});
-		System.out.println("QUANTIDADE DE USUÁRIOS ATIVOS: "+usersAtivos.size());
+		
+		findByNameIgnoreCase();
+		
+		findByNameIgnoreCaseLike();
+		
+		findByEmailQualquerCoisa();
+		
+//		findAllByStatus();
+//		getOneByIdAndDelete("2");
 	}
 
+	private void findByEmailQualquerCoisa() {
+		User user = userRepository.findByEmailQualquerCoisa("npires.lucas@gmail.com");
+		System.out.println("EMAIL ENCONTRADO: "+user.getEmail());
+		System.out.println("NOME DO USUÁRIO DO EMAIL: "+user.getName());
+	}
+
+	private void findByNameIgnoreCaseLike() {
+		User user = userRepository.findByNameIgnoreCaseLike("lu");
+		System.out.println("NOME ENCONTRADO NO findByNameIgnoreCaseLike: "+user.getName());
+	}
+
+	private void findByNameIgnoreCase() {
+		User user = userRepository.findByNameIgnoreCase("lucas");
+		System.out.println("NOME ENCONTRADO NO findByNameIgnoreCase: "+user.getName());
+	}
+	
 	private void findByName() {
 		User user = userRepository.findByName("Lucas");
 		System.out.println("NOME DO USUARIO ENCONTRADO: "+user.getName());
@@ -77,5 +79,26 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
 		roleRepository.save(role);
 		
 	}
+	
+//	private void getOneByIdAndDelete(String id) {
+//		Optional<User> user = userRepository.findById(id);
+//		System.out.println("USUÁRIO A SER EXCLUÍDO: "+user.get().getName());
+//		userRepository.deleteById(id);
+//	}
+	
+
+//	private void findAllByStatus() {
+//		List<User> usersAtivos = userRepository.findAllByStatus("Ativo");
+//		System.out.println("#######################");
+//		System.out.println("USUÁRIOS ATIVOS");
+//		usersAtivos.forEach(user ->{
+//			System.out.println("#######################");
+//			System.out.println("CÓDIGO: "+user.getId());
+//			System.out.println("NOME: "+user.getName());
+//			System.out.println("EMAIL: "+user.getEmail());
+//			System.out.println("#######################");
+//		});
+//		System.out.println("QUANTIDADE DE USUÁRIOS ATIVOS: "+usersAtivos.size());
+//	}
 
 }
